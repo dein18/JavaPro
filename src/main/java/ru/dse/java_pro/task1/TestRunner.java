@@ -18,12 +18,12 @@ public class TestRunner {
 
         for (Method method : testClass.getDeclaredMethods()) {
             if (method.isAnnotationPresent(BeforeSuite.class)) {
-                if (beforeSuite != null) throw new RuntimeException("Only one @BeforeSuite allowed");
-                if (!Modifier.isStatic(method.getModifiers())) throw new RuntimeException("@BeforeSuite must be static");
+                if (beforeSuite != null) throw new RuntimeException("Допускается только один @BeforeSuite.");
+                if (!Modifier.isStatic(method.getModifiers())) throw new RuntimeException("@BeforeSuite должен быть статическим.");
                 beforeSuite = method;
             } else if (method.isAnnotationPresent(AfterSuite.class)) {
-                if (afterSuite != null) throw new RuntimeException("Only one @AfterSuite allowed");
-                if (!Modifier.isStatic(method.getModifiers())) throw new RuntimeException("@AfterSuite must be static");
+                if (afterSuite != null) throw new RuntimeException("Допускается только один  @AfterSuite.");
+                if (!Modifier.isStatic(method.getModifiers())) throw new RuntimeException("@AfterSuite должен быть статическим.");
                 afterSuite = method;
             } else if (method.isAnnotationPresent(BeforeTest.class)) {
                 beforeTests.add(method);
@@ -59,7 +59,7 @@ public class TestRunner {
 
     private static Object[] parseCsvArgs(String csv, Class<?>[] types) {
         String[] parts = csv.split("\\s*,\\s*");
-        if (parts.length != types.length) throw new RuntimeException("CSV argument count mismatch");
+        if (parts.length != types.length) throw new RuntimeException("Несоответствие количества аргументов CSV.");
         Object[] args = new Object[parts.length];
 
         for (int i = 0; i < types.length; i++) {
@@ -73,6 +73,6 @@ public class TestRunner {
         if (type == boolean.class || type == Boolean.class) return Boolean.parseBoolean(value);
         if (type == String.class) return value;
         if (type == double.class || type == Double.class) return Double.parseDouble(value);
-        throw new RuntimeException("Unsupported parameter type: " + type.getName());
+        throw new RuntimeException("Неподдерживаемый тип параметра: " + type.getName());
     }
 }

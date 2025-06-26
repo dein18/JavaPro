@@ -25,12 +25,12 @@ public class MyTests {
 
     @Test(priority = 9)
     public void highPriorityTest() {
-        System.out.println("Running high priority test");
+        System.out.println("Запуск теста с высоким приоритетом.");
     }
 
     @Test
     public void defaultPriorityTest() {
-        System.out.println("Running default priority test");
+        System.out.println("Запуск теста приоритета по умолчанию.");
     }
 
     @Test(priority = 3)
